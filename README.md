@@ -6,6 +6,10 @@ We also include a copy of the HTML files that were used in the expert evaluation
 
 Note that TODS has not been updated at the time of this commit to work on Python3.10. Please install [TODS](https://github.com/datamllab/tods) locally. 
 
+See the reference_sample_data.csv.zip for a sample of what the expected input DataFrame is (geo_key_id, signal_key_id, time_value, value), which corresponds to a number referencing the location, the indicator type, the date, and the value of the indicator at that time and location. 
+
+This is input to run.py, which is an example of how to use test-statistic and scoring functions together. 
+
 ## Running Outshines outlier score generation
 
 First, create a file of test statistics by either using functions from the provided files (EWMA Functions, FlasH Modified functions, or TODS Functions, which also includes TODS scoring) or using your own. 
