@@ -97,10 +97,10 @@ def eval_set_siblings(set_ml, test, day):
     return ser
 
 def set_score(ts_df):
-    """Set scoring method.
+    """Sibling scoring method.
 
     Input: ts_df: pd.DataFrame of test statistics
-    Output: pd.DataFrame of Outshines Scores
+    Output: pd.DataFrame of Sibling Scores
     """
     test = ts_df.iloc[-100:, :] #we are only evaluating the top 100 test statistics
     total_score = []
@@ -114,3 +114,24 @@ def set_score(ts_df):
         ser_df['time_value'] = day
         total_score.append(ser_df)
     return pd.concat(total_score)
+
+
+def thresh_score(ts_df, thresh=0.9): #opt is 0.99
+    """Threshold scoring method.
+
+    Input: ts_df: pd.DataFrame of test statistics
+           thresh: Parameter to indicate threshold per stream.
+    Output: pd.DataFrame of Sibling Scores
+    """
+    flash_thresh_scores = []
+    thresh = ts_df.query('time_value <
+            @cutoff').groupby(['geo_key_id']).apply(lambda x: 
+            x.test_stat_total.quantile(0.9)).reset_index()
+    for id, df2 in ts_df.query('time_value > @cutoff').groupby(['geo_key_id']):
+        if not thresh.query('geo_key_id==@id').empty:
+          total_ties += (df2.test_stat_total > 
+                        thresh.query('geo_key_id==@id').values[0][-1]).sum()
+          df2['score'] = (df2.test_stat_total > 
+                          thresh.query('geo_key_id==@id').values[0][-1])
+          flash_thresh_scores.append(df2)
+    return pd.concat(flash_thresh_scores)
