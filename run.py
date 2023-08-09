@@ -4,7 +4,7 @@ import pandas as pd
 from ewma_functions import ewma_per_indicator
 # from flash_modified_functions import flash_per_indicator
 # from tods_functions import tods_per_indicator
-from scoring_functions import outshines_score_formatter#, set_score
+from scoring_functions import outshines_score_formatter#, set_score, thresh_score
 
 def run_module():
     """Create ranked values using EWMA + Outshines from data sample.
@@ -38,6 +38,8 @@ def run_module():
         ts_input.columns = ts_input.columns.droplevel()
         out_uni =  outshines_score_formatter(ts_input.T)
         # out_uni =  set_score(ts_input.T)
+        # out_uni =  thresh_score(ts_input.T)
+        # TODS Produces scores with contamination for thresh parameter & the produce function. 
         out_uni['indicator'] = signal_key
         all_outshines.append(out_uni)
     return pd.concat(all_outshines)
