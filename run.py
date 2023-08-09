@@ -41,6 +41,4 @@ def run_module():
         out_uni['indicator'] = signal_key
         all_outshines.append(out_uni)
     return pd.concat(all_outshines)
-
-
-run_module().to_csv("tmp.csv")
+    
