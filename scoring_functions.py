@@ -15,7 +15,7 @@ def eval_recent_distribution(i, t_day_num, evd_total, df_ts, day):
         day: day of evaluation
     Output: pd.Series of outshines results for df_ts.
     """
-    dist_total = pd.Series()
+    dist_total = pd.Series(dtype='float64')
     j = evd_total.shape[1]-i
     if i < j:
         start_ind = min(i, t_day_num//2)
@@ -42,7 +42,7 @@ def outshines_score(ind_ts,  evd_total, const,t_day_num=28):
         scored_df: pd.DataFrame which contains columns from the Outshines process
     """
     total_list = []
-    series = pd.Series()
+    series = pd.Series(dtype='float64')
     for i, (day,df_ts) in enumerate(ind_ts.sort_values(['time_value',
                                     'geo_key_id']).groupby('time_value')):
         df_ts = df_ts.reset_index(drop=True).drop_duplicates('geo_key_id')
@@ -124,9 +124,10 @@ def thresh_score(ts_df, thresh=0.9): #opt is 0.99
     Output: pd.DataFrame of Sibling Scores
     """
     flash_thresh_scores = []
-    thresh = ts_df.query('time_value <
-            @cutoff').groupby(['geo_key_id']).apply(lambda x: 
-            x.test_stat_total.quantile(0.9)).reset_index()
+    thresh = ts_df.query('time_value < @cutoff').\
+            groupby(['geo_key_id']).\
+            apply(lambda x: x.test_stat_total.quantile(0.9)).\
+            reset_index()
     for id, df2 in ts_df.query('time_value > @cutoff').groupby(['geo_key_id']):
         if not thresh.query('geo_key_id==@id').empty:
           total_ties += (df2.test_stat_total > 
