@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Functions to call when running the tool."""
+from tqdm import tqdm
 import pandas as pd
 from ewma_functions import ewma_per_indicator
 # from flash_modified_functions import flash_per_indicator
@@ -43,4 +44,7 @@ def run_module():
         out_uni['indicator'] = signal_key
         all_outshines.append(out_uni)
     return pd.concat(all_outshines)
+
+if __name__ == "__main__":
+    run_module().to_csv('outshines_output.csv', index=False)
     

@@ -24,7 +24,7 @@ cd tods
 /usr/local/bin/python3.8 -m pip install -e . 
 #Package Requirements
 env/bin/python -m pip install -r requirements.txt
-env/bin/python -m run.py 
+env/bin/python run.py 
 ```
 
 Once you are finished with the code, you can deactivate the virtual environment
