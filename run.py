@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """Functions to call when running the tool."""
-from tqdm import tqdm
 import pandas as pd
 from ewma_functions import ewma_per_indicator
 # from flash_modified_functions import flash_per_indicator
