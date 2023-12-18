@@ -1,6 +1,6 @@
-# Outshines Anonymous Documentation
+# Outshines Documentation
 
-This repository contains documents relevant to generating Outshines outlier detection scores. It will eventually live inside *the organization's* public Github repository along with the open source data. 
+This repository contains documents relevant to generating Outshines outlier detection scores. 
 
 We also include a copy of the HTML files that were used in the expert evaluation surveys. 
 
