@@ -2,7 +2,7 @@
 
 This repository contains documents relevant to generating Outshines outlier detection scores. 
 
-We also include a copy of the HTML files that were used in the expert evaluation surveys. 
+We also include a copy of the HTML files that were used in the expert evaluation surveys *as well as their raw rankings and explanations* in the survey folder. 
 
 Note that TODS has not been updated at the time of this commit to work on Python3.10. Please install [TODS](https://github.com/datamllab/tods) locally. 
 
